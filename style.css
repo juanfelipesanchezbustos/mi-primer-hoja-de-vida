@@ -1,92 +1,179 @@
+/* Variables de diseño - No hay cambios aquí */
 :root {
-    --bg: #ffffff;
-    --text: #1a202c;
-    --primary: #2b6cb0;
-    --card: #f7fafc;
-    --accent: #ed8936;
+    --bg-color: #f4f7f6;
+    --card-bg: #ffffff;
+    --text-main: #2d3436;
+    --text-muted: #636e72;
+    --accent-color: #0984e3;
+    --header-bg: #2d3436;
+    --header-text: #ffffff;
+    --transition: all 0.3s ease;
 }
 
+/* Variables para Dark Mode - No hay cambios aquí */
 [data-theme="dark"] {
-    --bg: #1a202c;
-    --text: #f7fafc;
-    --primary: #63b3ed;
-    --card: #2d3748;
+    --bg-color: #1e272e;
+    --card-bg: #2f3640;
+    --text-main: #f5f6fa;
+    --text-muted: #dcdde1;
+    --accent-color: #00a8ff;
+    --header-bg: #000000;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 body {
-    background-color: var(--bg);
-    color: var(--text);
-    font-family: 'Inter', system-ui, sans-serif;
-    transition: 0.3s;
-    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    line-height: 1.6;
+    transition: var(--transition);
 }
 
-.container { max-width: 900px; margin: 0 auto; padding: 20px; }
-
-/* Hero Section */
-.hero { text-align: center; padding: 50px 0; }
-.profile-img { 
-    width: 150px; height: 150px; border-radius: 50%; 
-    border: 4px solid var(--primary); object-fit: cover;
-}
-.tagline { font-style: italic; color: var(--accent); font-weight: bold; }
-
-/* Skills - Progress Bars */
-.skill-item { margin-bottom: 15px; }
-.skill-info { display: flex; justify-content: space-between; margin-bottom: 5px; }
-.progress-bar { background: #e2e8f0; border-radius: 10px; height: 10px; overflow: hidden; }
-.progress { background: var(--primary); height: 100%; transition: width 1s ease-in-out; }
-
-/* Projects Grid */
-.projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
-.project-card { 
-    background: var(--card); padding: 20px; border-radius: 12px; 
-    border-left: 5px solid var(--primary); transition: transform 0.3s;
-}
-.project-card:hover { transform: translateY(-5px); }
-
-/* Formulario */
-.contact-form { display: flex; flex-direction: column; gap: 10px; margin-top: 20px; }
-.contact-form input, .contact-form textarea {
-    padding: 12px; border: 1px solid #cbd5e0; border-radius: 6px; background: var(--card); color: var(--text);
-}
-.btn-send { background: var(--primary); color: white; border: none; padding: 12px; border-radius: 6px; cursor: pointer; }
-
-footer { text-align: center; padding: 40px; opacity: 0.6; }
-/* --- Estilos base para Desktop (Pantallas grandes) --- */
-.projects-grid { 
-    display: grid; 
-    grid-template-columns: repeat(2, 1fr); /* Dos columnas por defecto */
-    gap: 20px; 
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 20px;
 }
 
-/* --- Media Query para Dispositivos Móviles (< 600px) --- */
+/* Header - Actualizado para integrar la imagen */
+header {
+    background-color: var(--header-bg);
+    color: var(--header-text);
+    padding: 2.5rem 0; /* Un poco más de padding */
+    margin-bottom: 2rem;
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Nueva clase para agrupar imagen y texto */
+.profile-header-group {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem; /* Espacio entre imagen y texto */
+}
+
+/* Nuevas clases para dar estilo a la imagen */
+.profile-image-container {
+    flex-shrink: 0; /* Evita que la imagen se reduzca */
+}
+
+.profile-photo {
+    width: 120px; /* Tamaño de la imagen */
+    height: 120px;
+    border-radius: 50%; /* La hace redonda */
+    object-fit: cover; /* Asegura que la imagen no se deforme */
+    border: 4px solid var(--accent-color); /* Borde con el color de acento */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2); /* Sombra elegante */
+}
+
+.profile-info h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.25rem;
+}
+
+.tagline {
+    font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.8); /* Un poco más claro en el header oscuro */
+}
+
+#theme-toggle {
+    background: var(--accent-color);
+    border: none;
+    padding: 10px 15px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1.2rem;
+    transition: transform 0.2s;
+    align-self: flex-start; /* Alinea el botón arriba en pantallas grandes */
+}
+
+#theme-toggle:hover {
+    transform: scale(1.1);
+}
+
+/* Secciones - No hay cambios aquí */
+section {
+    background: var(--card-bg);
+    padding: 2rem;
+    margin-bottom: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+}
+
+h2 {
+    color: var(--accent-color);
+    margin-bottom: 1rem;
+    border-bottom: 2px solid var(--bg-color);
+    display: inline-block;
+}
+
+.job {
+    margin-bottom: 1.5rem;
+}
+
+.date {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    font-weight: bold;
+}
+
+/* Skills Grid */
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 10px;
+}
+
+.skill-tag {
+    background: var(--bg-color);
+    padding: 8px;
+    text-align: center;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+footer {
+    text-align: center;
+    padding: 2rem 0;
+    color: var(--text-muted);
+}
+
+/* Responsive - Actualizado para la imagen */
 @media (max-width: 600px) {
-    .container {
-        padding: 15px; /* Reducimos padding para ganar espacio */
+    .header-content {
+        flex-direction: column-reverse; /* El botón de tema primero */
+        text-align: center;
+        gap: 1.5rem;
     }
 
-    .projects-grid { 
-        grid-template-columns: 1fr; /* Forzamos una sola columna */
-        gap: 15px;
+    .profile-header-group {
+        flex-direction: column; /* Imagen arriba del texto */
+        gap: 1rem;
     }
 
-    .project-card {
-        padding: 1.2rem; /* Ajustamos el aire interno de la tarjeta */
+    .profile-photo {
+        width: 100px; /* Un poco más pequeña en móvil */
+        height: 100px;
     }
 
-    h1 {
-        font-size: 1.8rem; /* Reducimos un poco el tamaño del nombre para que no se corte */
+    .profile-info h1 {
+        font-size: 2rem;
     }
 
-    .hero {
-        padding: 30px 10px;
-    }
-
-    /* Opcional: Hacemos que el botón de Dark Mode sea más grande para pulgares */
     #theme-toggle {
-        padding: 12px 24px;
-        font-size: 1.4rem;
+        align-self: flex-end; /* Alinea el botón a la derecha en móvil */
+    }
+}
     }
 }
 .success-message {
