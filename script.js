@@ -1,31 +1,63 @@
-const themeToggle = document.getElementById('theme-toggle');
-const body = document.documentElement; // Usamos documentElement para manejar el atributo en <html>
-
-// Verificar si el usuario ya tenía una preferencia guardada
-const currentTheme = localStorage.getItem('theme');
-if (currentTheme) {
-    body.setAttribute('data-theme', currentTheme);
-    updateIcon(currentTheme);
-}
-
-themeToggle.addEventListener('click', () => {
-    let theme = body.getAttribute('data-theme');
-    
-    if (theme === 'dark') {
-        body.removeAttribute('data-theme');
-        localStorage.setItem('theme', 'light');
-        updateIcon('light');
-    } else {
-        body.setAttribute('data-theme', 'dark');
-        localStorage.setItem('theme', 'dark');
-        updateIcon('dark');
-    }
+const btn = document.getElementById('theme-toggle');
+btn.addEventListener('click', () => {
+    const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+    document.documentElement.setAttribute('data-theme', isDark ? 'light' : 'dark');
+    btn.textContent = isDark ? '🌙' : '☀️';
 });
 
-function updateIcon(theme) {
-    const icon = themeToggle.querySelector('.icon');
-    icon.textContent = theme === 'dark' ? '☀️' : '🌙';
-}
+// --- FUNCIONALIDAD: DARK MODE ---
+const btnTheme = document.getElementById('theme-toggle');
+const rootElement = document.documentElement;
+
+btnTheme.addEventListener('click', () => {
+    // Comprobamos si ya está en dark
+    const isDark = rootElement.getAttribute('data-theme') === 'dark';
+    
+    // Cambiamos el atributo
+    const newTheme = isDark ? 'light' : 'dark';
+    rootElement.setAttribute('data-theme', newTheme);
+    
+    // Cambiamos el icono del botón
+    btnTheme.textContent = isDark ? '🌙' : '☀️';
+    
+    // Guardamos la preferencia
+    localStorage.setItem('theme', newTheme);
+});
+
+// --- FUNCIONALIDAD: FORMULARIO DE CONTACTO ---
+const contactForm = document.querySelector('.contact-form');
+
+contactForm.addEventListener('submit', (e) => {
+    e.preventDefault(); // Evita que la página se recargue
+    
+    // Obtenemos el nombre del input para personalizar el mensaje
+    const nombre = contactForm.querySelector('input[type="text"]').value;
+    
+    // Cambiamos el contenido del formulario por un mensaje de éxito
+    contactForm.innerHTML = `
+        <div class="success-message">
+            <h3>¡Gracias por contactarme, ${nombre}!</h3>
+            <p>He recibido tu mensaje. Te responderé pronto a tu correo de la IED Jorge Gaitán Cortés.</p>
+            <button onclick="location.reload()" class="btn-send">Enviar otro mensaje</button>
+        </div>
+    `;
+});
+
+// --- FUNCIONALIDAD: DARK MODE ---
+const btnTheme = document.getElementById('theme-toggle');
+const rootElement = document.documentElement;
+
+// Cargar preferencia guardada
+const savedTheme = localStorage.getItem('theme') || 'light';
+rootElement.setAttribute('data-theme', savedTheme);
+btnTheme.textContent = savedTheme === 'dark' ? '☀️' : '🌙';
+
+btnTheme.addEventListener('click', () => {
+    const isDark = rootElement.getAttribute('data-theme') === 'dark';
+    const newTheme = isDark ? 'light' : 'dark';
+    rootElement.setAttribute('data-theme', newTheme);
+    btnTheme.textContent = newTheme === 'dark' ? '☀️' : '🌙';
+    localStorage.setItem('theme', newTheme);
 });
 
 // --- FUNCIONALIDAD: FORMULARIO CON VALIDACIÓN ---
