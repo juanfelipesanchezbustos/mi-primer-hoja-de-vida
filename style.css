@@ -351,4 +351,23 @@ footer {
 }
     from { opacity: 0; transform: translateY(10px); }
     to { opacity: 1; transform: translateY(0); }
+
+.success-message {
+    background: var(--card);
+    padding: 2rem;
+    border-radius: 12px;
+    border: 2px solid #48bb78; /* Color verde de éxito */
+    text-align: center;
+    animation: fadeIn 0.5s ease-in;
+}
+
+.success-message h3 {
+    color: #48bb78;
+    margin-bottom: 10px;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
 }
