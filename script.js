@@ -1,29 +1,42 @@
-// Esperamos a que todo el HTML esté cargado antes de ejecutar JS
+// Esperamos a que el DOM esté completamente cargado
 document.addEventListener('DOMContentLoaded', () => {
-    
-    const btnTheme = document.getElementById('theme-toggle');
-    const rootElement = document.documentElement;
+    const themeToggle = document.getElementById('theme-toggle');
+    const body = document.documentElement;
 
-    // Verificamos si el botón realmente existe para evitar errores en consola
-    if (btnTheme) {
-        console.log("¡Botón encontrado y listo!"); // Esto saldrá en la consola (F12)
-
-        // Cargar preferencia guardada
-        const savedTheme = localStorage.getItem('theme') || 'light';
-        rootElement.setAttribute('data-theme', savedTheme);
-        btnTheme.textContent = savedTheme === 'dark' ? '☀️' : '🌙';
-
-        btnTheme.addEventListener('click', () => {
-            const isDark = rootElement.getAttribute('data-theme') === 'dark';
-            const newTheme = isDark ? 'light' : 'dark';
-            
-            rootElement.setAttribute('data-theme', newTheme);
-            btnTheme.textContent = newTheme === 'dark' ? '☀️' : '🌙';
-            localStorage.setItem('theme', newTheme);
-            
-            console.log("Cambiando a tema:", newTheme);
-        });
-    } else {
-        console.error("Error: No encontré el botón con ID 'theme-toggle'. Revisa tu HTML.");
+    // 1. Verificación inicial de seguridad
+    if (!themeToggle) {
+        console.error("No se encontró el botón con ID 'theme-toggle'");
+        return;
     }
+
+    // 2. Cargar preferencia guardada
+    const currentTheme = localStorage.getItem('theme');
+    if (currentTheme === 'dark') {
+        body.setAttribute('data-theme', 'dark');
+        updateIcon('dark');
+    }
+
+    // 3. Evento de click
+    themeToggle.addEventListener('click', () => {
+        const isDark = body.getAttribute('data-theme') === 'dark';
+        
+        if (isDark) {
+            body.removeAttribute('data-theme');
+            localStorage.setItem('theme', 'light');
+            updateIcon('light');
+        } else {
+            body.setAttribute('data-theme', 'dark');
+            localStorage.setItem('theme', 'dark');
+            updateIcon('dark');
+        }
+    });
+
+    function updateIcon(theme) {
+        const icon = themeToggle.querySelector('.icon');
+        if (icon) {
+            icon.textContent = theme === 'dark' ? '☀️' : '🌙';
+        }
+    }
+    
+    console.log("Sistema de Dark Mode inicializado correctamente.");
 });
