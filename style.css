@@ -11,11 +11,11 @@
 }
 
 /* Variables para Dark Mode - No hay cambios aquí */
+
 [data-theme="dark"] {
     --bg-color: #1e272e;
     --card-bg: #2f3640;
     --text-main: #f5f6fa;
-    --text-muted: #dcdde1;
     --accent-color: #00a8ff;
     --header-bg: #000000;
 }
